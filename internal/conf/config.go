@@ -580,6 +580,7 @@ type Security struct {
 	AllowSubnetBypass AllowSubnetBypass `json:"allowSubnetBypass"` // subnet bypass configuration
 	BasicAuth         BasicAuth         `json:"basicAuth"`         // password authentication configuration
 	GoogleAuth        SocialProvider    `json:"googleAuth"`        // Google OAuth2 configuration
+	PublicAudioStream bool              `json:"publicAudioStream"` // true to allow public access to audio stream
 	GithubAuth        SocialProvider    `json:"githubAuth"`        // Github OAuth2 configuration
 	SessionSecret     string            `json:"sessionSecret"`     // secret for session cookie
 	SessionDuration   time.Duration     `json:"sessionDuration"`   // duration for browser session cookies

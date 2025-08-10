@@ -293,6 +293,8 @@ func setDefaultConfig() {
 	viper.SetDefault("security.githubauth.redirecturi", "/settings")
 	viper.SetDefault("security.githubauth.userid", "")
 
+	// Public Audio Stream configuration
+	viper.SetDefault("security.publicaudiostream", false)
 	// Sentry configuration
 	viper.SetDefault("sentry.enabled", false)
 	viper.SetDefault("sentry.dsn", "")

@@ -20,12 +20,12 @@ import (
 	"github.com/tphakala/birdnet-go/internal/datastore"
 	"github.com/tphakala/birdnet-go/internal/errors"
 	"github.com/tphakala/birdnet-go/internal/httpcontroller/handlers"
-	"github.com/tphakala/birdnet-go/internal/securefs"
 	"github.com/tphakala/birdnet-go/internal/imageprovider"
 	"github.com/tphakala/birdnet-go/internal/logging"
 	"github.com/tphakala/birdnet-go/internal/myaudio"
 	"github.com/tphakala/birdnet-go/internal/observability"
 	obsmetrics "github.com/tphakala/birdnet-go/internal/observability/metrics"
+	"github.com/tphakala/birdnet-go/internal/securefs"
 	"github.com/tphakala/birdnet-go/internal/security"
 	"github.com/tphakala/birdnet-go/internal/serviceapi"
 	"github.com/tphakala/birdnet-go/internal/suncalc"
@@ -173,6 +173,11 @@ func (s *Server) isAuthenticationEnabled(c echo.Context) bool {
 // IsAccessAllowed checks if a user is authenticated based on the context
 func (s *Server) IsAccessAllowed(c echo.Context) bool {
 	return s.OAuth2Server.IsUserAuthenticated(c)
+}
+
+// IsPublicAudioEnabled returns true if public audio streaming is enabled in settings.
+func (s *Server) IsPublicAudioEnabled(c echo.Context) bool {
+	return s.Handlers.Settings != nil && s.Handlers.Settings.Security.PublicAudioStream
 }
 
 func (s *Server) RealIP(c echo.Context) string {

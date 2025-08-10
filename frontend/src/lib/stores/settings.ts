@@ -264,6 +264,7 @@ export interface SecuritySettings {
     enabled: boolean;
     subnet: string;
   };
+  publicAudioStream: boolean;
 }
 
 export interface OAuthSettings {
@@ -586,6 +587,7 @@ function createEmptySettings(): SettingsFormData {
         enabled: false,
         subnet: '',
       },
+      publicAudioStream: false,
     },
     sentry: {
       enabled: false,

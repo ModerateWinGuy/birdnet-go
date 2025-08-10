@@ -19,8 +19,8 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/tphakala/birdnet-go/internal/conf"
-	"github.com/tphakala/birdnet-go/internal/securefs"
 	"github.com/tphakala/birdnet-go/internal/myaudio"
+	"github.com/tphakala/birdnet-go/internal/securefs"
 )
 
 // HLSStreamInfo contains information about a streaming session
@@ -170,6 +170,12 @@ func (h *Handlers) validateHLSRequest(c echo.Context) (sourceID, clientID, hlsBa
 	if server != nil {
 		// Type assertion to access the server methods
 		if s, ok := server.(interface {
+			IsPublicAudioEnabled(c echo.Context) bool
+			IsAccessAllowed(c echo.Context) bool
+			isAuthenticationEnabled(c echo.Context) bool
+		}); ok && s.IsPublicAudioEnabled(c) {
+			// Public audio stream enabled, skip auth
+		} else if s, ok := server.(interface {
 			IsAccessAllowed(c echo.Context) bool
 			isAuthenticationEnabled(c echo.Context) bool
 		}); ok {

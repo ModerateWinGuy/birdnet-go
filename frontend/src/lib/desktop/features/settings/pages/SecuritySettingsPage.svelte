@@ -38,7 +38,7 @@
   import { hasSettingsChanged } from '$lib/utils/settingsChanges';
   import { alertIconsSvg, systemIcons } from '$lib/utils/icons'; // Centralized icons - see icons.ts
   import { t } from '$lib/i18n';
-
+  
 
   // PERFORMANCE OPTIMIZATION: Reactive settings with proper defaults
   let settings = $derived(
@@ -66,6 +66,7 @@
         enabled: false,
         subnet: '',
       },
+      publicAudioStream: false,
     }
   );
 
@@ -224,6 +225,13 @@
     settingsActions.updateSection('security', {
       ...settings,
       allowSubnetBypass: { ...settings.allowSubnetBypass, subnet },
+    });
+  }
+
+  function updatePublicAudioStreamEnabled(enabled: boolean) {
+    settingsActions.updateSection('security', {
+      ...settings,
+      publicAudioStream: enabled
     });
   }
 </script>
@@ -505,6 +513,14 @@
           </span>
         </div>
       {/if}
+    <div class="mt-4">
+      <Checkbox
+        checked={settings.publicAudioStream}
+        label="Public Audio Stream"
+        helpText="Allow anyone to access the live audio stream without authentication."
+        disabled={store.isLoading || store.isSaving}
+        onchange={updatePublicAudioStreamEnabled}
+      />
     </div>
   </SettingsSection>
   </div>
