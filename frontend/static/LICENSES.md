@@ -382,6 +382,11 @@ Source: Unknown
 License: Unknown
 Source: Unknown
 
+### github.com/tphakala/birdnet-go/tools/dbexport
+
+License: Unknown
+Source: Unknown
+
 ### github.com/tphakala/flac
 
 License: https://github.com/tphakala/flac/blob/20d6d98f5ee3/LICENSE
